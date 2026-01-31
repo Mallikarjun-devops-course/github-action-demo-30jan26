@@ -1,0 +1,32 @@
+name: CI Practice Workflow
+
+# 1. Triggers: When should this run?
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+# 2. Jobs: What tasks should be performed?
+jobs:
+  build:
+    # Environment the job runs on
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out your repository code
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # Step 2: Set up a specific language environment
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # Step 3: Run standard terminal commands
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Tests
+        run: npm test
